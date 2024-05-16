@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Sidebar } from "flowbite-react";
 import { HiUser, HiArrowSmRight } from "react-icons/hi";
 
-export default function DashSidebar() {
+export default function DashSidebar({ handleSignOut }) {
   const location = useLocation();
   const [tab, setTab] = useState("");
   useEffect(() => {
@@ -30,7 +30,12 @@ export default function DashSidebar() {
               Profile
             </Sidebar.Item>
           </Link>
-          <Sidebar.Item active icon={HiArrowSmRight} className="cursor-pointer">
+          <Sidebar.Item
+            active
+            icon={HiArrowSmRight}
+            className="cursor-pointer"
+            onClick={handleSignOut}
+          >
             Sign Out
           </Sidebar.Item>
         </Sidebar.ItemGroup>
