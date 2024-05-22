@@ -10,8 +10,8 @@ import {
 } from "firebase/storage";
 import { app } from "../firebase";
 import { CircularProgressbar } from "react-circular-progressbar";
-import { HiOutlineExclamationCircle } from "react-icons/hi";
 import "react-circular-progressbar/dist/styles.css";
+import { HiOutlineExclamationCircle } from "react-icons/hi";
 import {
   updateStart,
   updateSuccess,
