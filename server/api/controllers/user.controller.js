@@ -106,7 +106,7 @@ export const getUsers = async (req, res, next) => {
 
     res
       .status(200)
-      .json({ user: usersWithoutPassword, totalUsers, lastMonthUsers });
+      .json({ users: usersWithoutPassword, totalUsers, lastMonthUsers });
   } catch (error) {
     next(error);
   }
