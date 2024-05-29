@@ -85,9 +85,6 @@ export default function DashUsers() {
               <Table.HeadCell>Email</Table.HeadCell>
               <Table.HeadCell>Admin</Table.HeadCell>
               <Table.HeadCell>Delete</Table.HeadCell>
-              {/* <Table.HeadCell>
-                <span>Edit</span>
-              </Table.HeadCell> */}
             </Table.Head>
             <Table.Body className="divide-y">
               {users.map((user) => (
@@ -125,14 +122,6 @@ export default function DashUsers() {
                       Delete
                     </span>
                   </Table.Cell>
-                  {/* <Table.Cell>
-                    <Link
-                      className="text-teal-500 hover:underline cursor-pointer"
-                      to={`/update-post/${user._id}`}
-                    >
-                      <span>Edit</span>
-                    </Link>
-                  </Table.Cell> */}
                 </Table.Row>
               ))}
             </Table.Body>
