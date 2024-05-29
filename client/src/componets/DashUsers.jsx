@@ -55,7 +55,6 @@ export default function DashUsers() {
   };
 
   const handleDeleteUser = async () => {
-    setShowModal(false);
     try {
       const res = await fetch(`/api/user/delete/${userIdToDelete}`, {
         method: "DELETE",
@@ -67,6 +66,7 @@ export default function DashUsers() {
         setUsers((prev) => {
           return prev.filter((user) => user._id !== userIdToDelete); // keep posts with different ids than the deleted post
         });
+        setShowModal(false);
       }
     } catch (error) {
       console.log(error.message);
@@ -147,7 +147,7 @@ export default function DashUsers() {
           )}
         </>
       ) : (
-        <p>You have no posts yet!</p>
+        <p>No users found!</p>
       )}
 
       <Modal
