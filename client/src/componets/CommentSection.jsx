@@ -2,6 +2,7 @@ import { Alert, Button, Textarea } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import Comment from "./Comment";
 
 export default function CommentSection({ postId }) {
   const { currentUser } = useSelector((state) => state.user);
@@ -23,10 +24,10 @@ export default function CommentSection({ postId }) {
         }),
       });
       const data = await res.json();
-      console.log(data);
       if (res.ok) {
         setComment("");
         setCommentError(null);
+        setComments([data, ...comments])
       }
     } catch (error) {
       setCommentError(error.message);
@@ -100,6 +101,11 @@ export default function CommentSection({ postId }) {
           )}
         </form>
       )}
+      {
+        comments.length === 0 ? (<p className="text-sm my-5">No comments yet!</p>):(<><div className="text-sm my-5 flex items-center gap-1"><p className="">Comments</p><div className="border border-gray-400 py-1 px-2 rounded-sm"><p>{comments.length}</p></div></div>
+        {comments.map((comment)=>(<Comment key={comment._id} comment={comment}/>))}
+        </>)
+      }
     </div>
   );
 }
