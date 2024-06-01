@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 export default function CommentSection({ postId }) {
   const { currentUser } = useSelector((state) => state.user);
   const [comment, setComment] = useState("");
+  const [comments, setComments] = useState([]);
   const [commentError, setCommentError] = useState(null);
 
   const handleSubmit = async (e) => {
@@ -32,6 +33,23 @@ export default function CommentSection({ postId }) {
     }
   };
 
+  useEffect(() => {
+    const getComments = async () => {
+      try {
+        const res = await fetch(`/api/comment/get-post-comments/${postId}`);
+        const data = await res.json();
+        if(!res.ok) return console.log(data.message)
+          if(res.ok) {
+            setComments(data)
+          }
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+
+    getComments();
+  }, [postId]);
+
   return (
     <div className="max-w-2xl mx-auto w-full p-3">
       {currentUser ? (
@@ -44,8 +62,7 @@ export default function CommentSection({ postId }) {
           />
           <Link
             to={`/dashboard?tab=profile`}
-            className="text-xs text-cyan-600 hover:underline"
-          >
+            className="text-xs text-cyan-600 hover:underline">
             @{currentUser.username}
           </Link>
         </div>
@@ -60,8 +77,7 @@ export default function CommentSection({ postId }) {
       {currentUser && (
         <form
           className="border border-teal-500 rounded-md p-3"
-          onSubmit={handleSubmit}
-        >
+          onSubmit={handleSubmit}>
           <Textarea
             placeholder="Add a comment..."
             rows="3"
